@@ -15,7 +15,7 @@ Data Carpentries "[Data Analysis and Visualization in Python for Ecologists](htt
 
 Charles Severance, Python for Everybody: Exploring Data in Python 3, Chapter 15 "Using Databases and SQL" (185-208)
 
-
+Nik Piepenbreier, "[Python SQLite Tutorial - The Ultimate Guide](https://towardsdatascience.com/python-sqlite-tutorial-the-ultimate-guide-fdcb8d7a4f30)", *Towards Data Science* (1 April 2020).
 
 # Table of Contents
 
