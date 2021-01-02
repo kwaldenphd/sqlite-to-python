@@ -47,7 +47,7 @@ The author consulted the following resources when writing this tutorial.
 
 ## Establishing a Connection
 
-6. The `sqlite3` module "provides a SQL interface" from within Python ([`sqlite3` documentation](https://docs.python.org/3/library/sqlite3.html)].
+6. The `sqlite3` module "provides a SQL interface" from within Python ([`sqlite3` documentation](https://docs.python.org/3/library/sqlite3.html)).
 
 7. `sqlite3` lets us establish a connection with a SQL database from within Python and then we can interact with the database using modified SQL commands.
 
