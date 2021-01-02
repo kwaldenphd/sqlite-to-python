@@ -1,48 +1,56 @@
-# Lab #8: From SQLite into Python
+# From SQLite into Python
 
 <a href="http://creativecommons.org/licenses/by-nc/4.0/" rel="license"><img style="border-width: 0;" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" alt="Creative Commons License" /></a>
 This tutorial is licensed under a <a href="http://creativecommons.org/licenses/by-nc/4.0/" rel="license">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
 
 ## Lab Goals
 
+This lab covers how to connect to an SQLite database from Python using `sqlite3`. It also covers how to modify SQL query syntax when working in the Python programming environment. 
+
 ## Acknowledgements
 
-Python for Data Analysis Wes McKinney, Chapter 6 Data Loading Storage and File Formats, 6.4 Interacting With Databases (191-193)
-
-David Muller, "[How To Use the `sqlite3` Module in Python 3](https://www.digitalocean.com/community/tutorials/how-to-use-the-sqlite3-module-in-python-3)" *Digital Ocean* (2 June 2020)
-
-Data Carpentries "[Data Analysis and Visualization in Python for Ecologists](https://datacarpentry.org/python-ecology-lesson/09-working-with-sql/index.html)"
-
-Charles Severance, Python for Everybody: Exploring Data in Python 3, Chapter 15 "Using Databases and SQL" (185-208)
-
-Nik Piepenbreier, "[Python SQLite Tutorial - The Ultimate Guide](https://towardsdatascience.com/python-sqlite-tutorial-the-ultimate-guide-fdcb8d7a4f30)", *Towards Data Science* (1 April 2020).
+The author consulted the following resources when writing this tutorial.
+- Chapter 6, "Data Loading, Storate, and File Formats" section 6.4 "Interacting With Databases" (pp. 191-193) from Wes McKinney's [*Python for Data Analysis: Data Wrangling With pandas, Numpy, and IPython*](https://www.oreilly.com/library/view/python-for-data/9781491957653/) (O'Reilly, 2017).
+- David Muller, "[How To Use the `sqlite3` Module in Python 3](https://www.digitalocean.com/community/tutorials/how-to-use-the-sqlite3-module-in-python-3)" *Digital Ocean* (2 June 2020)
+- Data Carpentries tutorial, "[Data Analysis and Visualization in Python for Ecologists](https://datacarpentry.org/python-ecology-lesson/09-working-with-sql/index.html)"
+- Chapter 15 "Using Databases and SQL" (pp. 185-208) from Charles Severance's [*Python for Everybody: Exploring Data in Python 3*](https://www.py4e.com/) (2016).
+- Nik Piepenbreier, "[Python SQLite Tutorial - The Ultimate Guide](https://towardsdatascience.com/python-sqlite-tutorial-the-ultimate-guide-fdcb8d7a4f30)", *Towards Data Science* (1 April 2020).
 
 # Table of Contents
 
+- [From SQLite into Python](#from-sqlite-into-python)
+  * [Establishing a Connection](#establishing-a-connection)
+  * [Modifying SQL Query Syntax](#modifying-sql-query-syntax)
+  * [Additional Considerations](#additional-considerations)
+- [Practice Problems](#practice-problems)
+- [Lab Notebook Questions](#lab-notebook-questions)
+
 # From SQLite into Python
 
-In SQLite lab, we created a relational database with information about U.S. professional baseball players and teams.
+1. In SQLite lab, we created a relational database with information about U.S. professional baseball players and teams.
 
-We also explored how SQL syntax can let us interact with a relational database.
+2. We also explored how SQL syntax can let us interact with a relational database.
 
-But imagine we want to work with a relational database from within Python.
+4. But imagine we want to work with a relational database from within Python.
 
-We could work in SQL to create a new table that combines specific fields we want to work with, then export that table as a `.csv` file and load it into Python.
+5. We could work in SQL to create a new table that combines specific fields we want to work with, then export that table as a `.csv` file and load it into Python.
 
-But we also have the option to interact with a SQL-based relational database from within Python, using a couple of key packages.
+5. But we also have the option to interact with a SQL-based relational database from within Python, using a couple of key packages.
 
-The `sqlite3` module "provides a SQL interface" from within Python ([`sqlite3` documentation](https://docs.python.org/3/library/sqlite3.html)].
+## Establishing a Connection
 
-`sqlite3` lets us establish a connection with a SQL database from within Python and then we can interact with the database using modified SQL commands.
+6. The `sqlite3` module "provides a SQL interface" from within Python ([`sqlite3` documentation](https://docs.python.org/3/library/sqlite3.html)].
 
-The basic steps for `sqlite3`:
+7. `sqlite3` lets us establish a connection with a SQL database from within Python and then we can interact with the database using modified SQL commands.
+
+8. The basic steps for `sqlite3`:
 - Install and import `sqlite3` module
 - Establish a `connection` with the database
 - Create a `cursor` object 
 - Use the `execute()` method in combination with the `cursor` object to execute SQL queries
 - Close the connection using `close()` when done working with the database
 
-To express this programmatically in Python:
+9. To express this programmatically in Python:
 ```Python
 # import sqlite3 module
 import sqlite3
@@ -57,26 +65,28 @@ cursor = connection.cursor()
 cursor.close()
 ```
 
-Now we can use our `cursor` object to interact with the database using modified SQL syntax.
+## Modifying SQL Query Syntax
 
-The basic template for `sqlite3` syntax:
+10. Now we can use our `cursor` object to interact with the database using modified SQL syntax.
+
+11. The basic template for `sqlite3` syntax:
 ```Python
 cursor.execute("SQL QUERY/COMMANDS GO HERE")
 ```
 
-`cursor.execute()` followed by the SQL command (in quotation marks) lets us use SQL statements on our database from within Python.
+12. `cursor.execute()` followed by the SQL command (in quotation marks) lets us use SQL statements on our database from within Python.
 
-Check out the [`sqlite3` documentation](https://docs.python.org/3/library/sqlite3.html) to learn more about the module's functionality and syntax.
+13. Check out the [`sqlite3` documentation](https://docs.python.org/3/library/sqlite3.html) to learn more about the module's functionality and syntax.
 
-For example, let's say we wanted to select the unique player ids from the `Player_Birthplaces` table in our database.
+14. For example, let's say we wanted to select the unique player ids from the `Player_Birthplaces` table in our database.
 
-Remember the original SQL syntax for this query:
+15. Remember the original SQL syntax for this query:
 ```SQL
 SELECT DISTINCT player_ids
 FROM player_birthplaces;
 ```
 
-The modified syntax for this query in Python using `sqlite3`:
+16. The modified syntax for this query in Python using `sqlite3`:
 ```Python
 # import sqlite3 module
 import sqlite3
@@ -97,22 +107,22 @@ print(player_ids)
 cursor.close()
 ```
 
-The `cursor.execute()` function runs the `SELECT DISTINCT` statement.
+17. The `cursor.execute()` function runs the `SELECT DISTINCT` statement.
 
-The new `player_ids` variable contains the `player_id` column from the `player_birthplaces` table as a list in Python.
+18. The new `player_ids` variable contains the `player_id` column from the `player_birthplaces` table as a list in Python.
 
-Another example using the `WHERE` statement for filtering.
+19. Another example using the `WHERE` statement for filtering.
 
-The original SQL query:
+20. The original SQL query:
 ```SQL
 SELECT *
 FROM Player_Birthplaces
 WHERE country='DO';
 ```
 
-This query returns all columns from the `Player_Birthplaces` table where data in the `country` field is equal to `DO`.
+21. This query returns all columns from the `Player_Birthplaces` table where data in the `country` field is equal to `DO`.
 
-The modified syntax for this query in Python using `sqlite3`:
+22. The modified syntax for this query in Python using `sqlite3`:
 ```Python
 # import sqlite3 module
 import sqlite3
@@ -133,9 +143,9 @@ print(do_players)
 cursor.close()
 ```
 
-Let's say we wanted to just see a query result and not load it to a new varible.
+23. Let's say we wanted to just see a query result and not load it to a new varible.
 
-A modified version of the previous example:
+24. A modified version of the previous example:
 ```Python
 # import sqlite3 module
 import sqlite3
@@ -164,27 +174,34 @@ print(count, 'rows')
 cursor.close()
 ```
 
-In this example, the `for` loop iterates over the rows in the database and uses the `count` variable to track how many rows in the database meet the `WHERE` condition.
+25. In this example, the `for` loop iterates over the rows in the database and uses the `count` variable to track how many rows in the database meet the `WHERE` condition.
 
-<blockquote>QX: How is Python storing the output for the last query? Should be seeing each row as sub-list within list. What could we do with this output?</blockquote>
+<blockquote>Q1: How is Python storing the output for the last query? Should be seeing each row as sub-list within list. What could we do with this output?</blockquote>
 
-<blockquote>QX: Explore modifying other SQL queries in Python. What did you try, how did it go, etc.</blockquote>
+<blockquote>Q2: Explore modifying other SQL queries in Python. What did you try, how did it go, etc.</blockquote>
 
-Why would we want to work with a relational database from within Python?
+### Additional Considerations
 
-The short answer is program performance and memory load.
+26. Why would we want to work with a relational database from within Python?
 
-Storing your data in an SQLite database and loading query results into Python requires significantly less memory than storing all the database data in Python.
+27. The short answer is program performance and memory load.
 
-Less stored data = lower memory needs = improved program performance.
+28. Storing your data in an SQLite database and loading query results into Python requires significantly less memory than storing all the database data in Python.
 
-Interacting with a database from Python can also be a workflow consideration.
+29. Less stored data = lower memory needs = improved program performance.
 
-Imagine your company has data stored in a relational database system (Oracle, AWS, Microsft Access, etc.), and there are specific aggregations or calculations that need to be performed on that data regularly (say, for quarterly or annual reports).
+30. Interacting with a database from Python can also be a workflow consideration.
 
-Provided the underlying data structure remains largely consistent (which in most proprietary database systems it will), you could write a program in Python to automatically generate those aggregations and calculations.
+31. Imagine your company has data stored in a relational database system (Oracle, AWS, Microsft Access, etc.), and there are specific aggregations or calculations that need to be performed on that data regularly (say, for quarterly or annual reports).
+
+32. Provided the underlying data structure remains largely consistent (which in most proprietary database systems it will), you could write a program in Python to automatically generate those aggregations and calculations.
 
 # Practice Problems
 
+33. No practice problems for this lab. Spend this time working on the final project.
 
 # Lab Notebook Questions
+
+Q1: How is Python storing the output for the last query? Should be seeing each row as sub-list within list. What could we do with this output?
+
+Q2: Explore modifying other SQL queries in Python. What did you try, how did it go, etc.
