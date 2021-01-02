@@ -5,7 +5,15 @@ This tutorial is licensed under a <a href="http://creativecommons.org/licenses/b
 
 ## Lab Goals
 
-This lab covers how to connect to an SQLite database from Python using `sqlite3`. It also covers how to modify SQL query syntax when working in the Python programming environment. 
+This lab covers how to connect to an SQLite database from Python using `sqlite3`. It also covers how to modify SQL query syntax when working in the Python programming environment.
+
+By the end of this lab, students will be able to:
+- Understand the core components of `sqlite3`
+- Connecting to a SQLite database from Python
+- Modify SQL queries for the Python programming environment
+- Understand the basics of data loading, storage, memory, and program performance
+
+[Click here](https://raw.githubusercontent.com/kwaldenphd/sqlite-to-python/main/sqlite-to-python.ipynb) and select the "Save as" option to download this lab as a Jupyter Notebook.
 
 ## Acknowledgements
 
