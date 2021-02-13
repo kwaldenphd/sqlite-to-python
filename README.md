@@ -73,6 +73,8 @@ cursor = connection.cursor()
 cursor.close()
 ```
 
+<blockquote>Q1: Describe the basic steps of how to establish a connection with a SQLite database from within Python.</blockquote>
+
 ## Modifying SQL Query Syntax
 
 10. Now we can use our `cursor` object to interact with the database using modified SQL syntax.
@@ -184,9 +186,9 @@ cursor.close()
 
 25. In this example, the `for` loop iterates over the rows in the database and uses the `count` variable to track how many rows in the database meet the `WHERE` condition.
 
-<blockquote>Q1: How is Python storing the output for the last query? Should be seeing each row as sub-list within list. What could we do with this output?</blockquote>
+<blockquote>Q2: Take at least 3 of the queries you wrote for the Queries and Joins lab and modify them to run within a Python environment. Include code + comments. What changes did you have to make to the query syntax? Any challenges you encountered (and how did you solve them)?</blockquote>
 
-<blockquote>Q2: Explore modifying other SQL queries in Python. What did you try, how did it go, etc.</blockquote>
+<blockquote>Q3: How is Python storing the output for the last query from step 24? What could we do with this output?</blockquote>
 
 ### Additional Considerations
 
@@ -210,6 +212,8 @@ cursor.close()
 
 # Lab Notebook Questions
 
-Q1: How is Python storing the output for the last query? Should be seeing each row as sub-list within list. What could we do with this output?
+Q1: Describe the basic steps of how to establish a connection with a SQLite database from within Python.
 
-Q2: Explore modifying other SQL queries in Python. What did you try, how did it go, etc.
+Q2: Take at least 3 of the queries you wrote for the Queries and Joins lab and modify them to run within a Python environment. Include code + comments. What changes did you have to make to the query syntax? Any challenges you encountered (and how did you solve them)?
+
+Q3: How is Python storing the output for the last query from step 24? What could we do with this output?
