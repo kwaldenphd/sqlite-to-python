@@ -93,7 +93,7 @@ cursor.execute("SQL QUERY/COMMANDS GO HERE")
 15. Remember the original SQL syntax for this query:
 ```SQL
 SELECT DISTINCT player_ids
-FROM player_birthplaces;
+FROM Player_Birthplaces;
 ```
 
 16. The modified syntax for this query in Python using `sqlite3`:
@@ -108,7 +108,7 @@ connection = sqlite3.connect("database_name.db")
 cursor = connection.cursor()
 
 # creates a new variable player ids 
-player_ids = cursor.execute("SELECT DISTINCT player_ids FROM player_birthplaces")
+player_ids = cursor.execute("SELECT DISTINCT player_ids FROM Player_Birthplaces")
 
 # print the list of unique player ids now contained in the player_ids variable
 print(player_ids)
@@ -119,7 +119,7 @@ cursor.close()
 
 17. The `cursor.execute()` function runs the `SELECT DISTINCT` statement.
 
-18. The new `player_ids` variable contains the `player_id` column from the `player_birthplaces` table as a list in Python.
+18. The new `player_ids` variable contains the `player_id` column from the `Player_Birthplaces` table as a list in Python.
 
 19. Another example using the `WHERE` statement for filtering.
 
@@ -144,7 +144,7 @@ connection = sqlite3.connect("database_name.db")
 cursor = connection.cursor()
 
 # creates a new variable for query results
-do_players = cursor.execute("SELECT * FROM Player_Birthplaces WHERE country='do'")
+do_players = cursor.execute("SELECT * FROM Player_Birthplaces WHERE country='DO'")
 
 # print the new do_players variable
 print(do_players)
@@ -167,7 +167,7 @@ connection = sqlite3.connect("database_name.db")
 cursor = connection.cursor()
 
 # creates a new variable for query results
-cursor.execute("SELECT * FROM Player_Birthplaces WHERE country='do'")
+cursor.execute("SELECT * FROM Player_Birthplaces WHERE country='DO'")
 
 # set a row count variable
 count = 0
@@ -202,7 +202,7 @@ cursor.close()
 
 30. Interacting with a database from Python can also be a workflow consideration.
 
-31. Imagine your company has data stored in a relational database system (Oracle, AWS, Microsft Access, etc.), and there are specific aggregations or calculations that need to be performed on that data regularly (say, for quarterly or annual reports).
+31. Imagine your company has data stored in a relational database system (Oracle, AWS, Microsft Access, etc.) and there are specific aggregations or calculations that need to be performed on that data regularly (say, for quarterly or annual reports).
 
 32. Provided the underlying data structure remains largely consistent (which in most proprietary database systems it will), you could write a program in Python to automatically generate those aggregations and calculations.
 
