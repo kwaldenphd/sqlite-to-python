@@ -102,19 +102,19 @@ FROM Player_Birthplaces;
 import sqlite3
 
 # establish connection to database
-connection = sqlite3.connect("database_name.db")
+connection = sqlite3.connect("EoCII_Database_Lab.db")
 
 # creates the cursor object
 cursor = connection.cursor()
 
 # creates a new variable player ids 
-player_ids = cursor.execute("SELECT DISTINCT player_ids FROM Player_Birthplaces")
+player_ids = cursor.execute("SELECT DISTINCT id_person FROM Player_PoB")
 
-# print the list of unique player ids now contained in the player_ids variable
-print(player_ids)
+# get the query return
+player_id_results = cursor.fetchall()
 
-# closes the connection
-cursor.close()
+# print the list of unique player ids now contained in the player_id_results variable
+print(player_id_results)
 ```
 
 17. The `cursor.execute()` function runs the `SELECT DISTINCT` statement.
@@ -134,20 +134,20 @@ WHERE country='DO';
 
 22. The modified syntax for this query in Python using `sqlite3`:
 ```Python
-# import sqlite3 module
-import sqlite3
-
 # establish connection to database
-connection = sqlite3.connect("database_name.db")
+connection = sqlite3.connect("EoCII_Database_Lab.db")
 
 # creates the cursor object
 cursor = connection.cursor()
 
 # creates a new variable for query results
-do_players = cursor.execute("SELECT * FROM Player_Birthplaces WHERE country='DO'")
+do_players = cursor.execute("SELECT * FROM Player_PoB WHERE country='DO'")
+
+# get the query return
+player_country_results = cursor.fetchall()
 
 # print the new do_players variable
-print(do_players)
+print(player_country_results)
 
 # closes the connection
 cursor.close()
@@ -161,13 +161,13 @@ cursor.close()
 import sqlite3
 
 # establish connection to database
-connection = sqlite3.connect("database_name.db")
+connection = sqlite3.connect("EoCII_Database_Lab.db")
 
 # creates the cursor object
 cursor = connection.cursor()
 
 # creates a new variable for query results
-cursor.execute("SELECT * FROM Player_Birthplaces WHERE country='DO'")
+cursor.execute("SELECT * FROM Player_PoB WHERE country='DO'")
 
 # set a row count variable
 count = 0
