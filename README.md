@@ -24,6 +24,8 @@ The author consulted the following resources when writing this tutorial.
 - Chapter 15 "Using Databases and SQL" (pp. 185-208) from Charles Severance's [*Python for Everybody: Exploring Data in Python 3*](https://www.py4e.com/) (2016).
 - Nik Piepenbreier, "[Python SQLite Tutorial - The Ultimate Guide](https://towardsdatascience.com/python-sqlite-tutorial-the-ultimate-guide-fdcb8d7a4f30)", *Towards Data Science* (1 April 2020).
 
+Peer review and editing was provided by Spring 2021 graduate teaching assistant [Subhadyuti Sahoo](https://github.com/SDSAHOO703).
+
 # Table of Contents
 
 - [From SQLite into Python](#from-sqlite-into-python)
