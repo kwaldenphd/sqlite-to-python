@@ -13,8 +13,6 @@ By the end of this lab, students will be able to:
 - Modify SQL queries for the Python programming environment
 - Understand the basics of data loading, storage, memory, and program performance
 
-[Click here](https://raw.githubusercontent.com/kwaldenphd/sqlite-to-python/main/sqlite-to-python.ipynb) and select the "Save as" option to download this lab as a Jupyter Notebook.
-
 ## Acknowledgements
 
 The author consulted the following resources when writing this tutorial.
@@ -28,22 +26,42 @@ Peer review and editing was provided by Spring 2021 graduate teaching assistant 
 
 # Table of Contents
 
+- [Lab notebook template](#lab-notebook-template)
+- [Data](#data)
 - [From SQLite into Python](#from-sqlite-into-python)
   * [Establishing a Connection](#establishing-a-connection)
   * [Modifying SQL Query Syntax](#modifying-sql-query-syntax)
   * [Additional Considerations](#additional-considerations)
-- [Practice Problems](#practice-problems)
 - [Lab Notebook Questions](#lab-notebook-questions)
+
+[Link to lab procedure as a Jupyter Notebook](https://drive.google.com/file/d/19TiuTHWtsn_0aDpn6g2VKK0IGqQNDj6y/view?usp=sharing)
+
+# Lab Notebook Template
+
+[Link to lab notebook template (Jupyter Notebook)](https://colab.research.google.com/drive/1LFkXDBg0IUQ-Rpa_-ZVvAx1agKZ-2Hft?usp=sharing)
+
+# Data
+
+In a previous lab, we created a relational database from three `.csv` files.
+- [`Player_Birthplaces.csv`](https://drive.google.com/file/d/1qthm3HSN5FaEFusC1_Zk-0qL0A6LIEB-/view?usp=sharing)
+- [`Team_Locations.csv`](https://drive.google.com/file/d/1fttQhzoAwYOJC-mB17RATaqD4mfUTIV_/view?usp=sharing)
+- [`Combined_Transactions.csv`](https://drive.google.com/file/d/17Z9C7snAMjARTQYoRXufwaO2j9ssl0g8/view?usp=sharing)
+
+Consult [that lab's procedure/documentation](https://github.com/kwaldenphd/data-models#getting-started-with-db-browser-for-sqlite) if you need to re-create this database.
+
+You will need this relational database file for this lab.
+
+If needed, you can download the relational database [from Google Drive](https://drive.google.com/file/d/1uQHOIeMdCZOyXsIdDgfimUE-63I33pIm/view?usp=sharing).
 
 # From SQLite into Python
 
-1. In SQLite lab, we created a relational database with information about U.S. professional baseball players and teams.
+1. In previous labs, we created a relational database with information about U.S. professional baseball players and teams.
 
 2. We also explored how SQL syntax can let us interact with a relational database.
 
-4. But imagine we want to work with a relational database from within Python.
+3. But imagine we want to work with a relational database from within Python.
 
-5. We could work in SQL to create a new table that combines specific fields we want to work with, then export that table as a `.csv` file and load it into Python.
+4. We could work in SQL using a combination of queries and joins to create a new table with specific fields we want to work with, then export that table as a `.csv` file and load it into Python.
 
 5. But we also have the option to interact with a SQL-based relational database from within Python, using a couple of key packages.
 
@@ -61,12 +79,13 @@ Peer review and editing was provided by Spring 2021 graduate teaching assistant 
 - Close the connection using `close()` when done working with the database
 
 9. To express this programmatically in Python:
+
 ```Python
 # import sqlite3 module
 import sqlite3
 
 # establish connection to database
-connection = sqlite3.connect("database_name.db")
+connection = sqlite3.connect("data.db")
 
 # creates the cursor object
 cursor = connection.cursor()
@@ -82,6 +101,7 @@ cursor.close()
 10. Now we can use our `cursor` object to interact with the database using modified SQL syntax.
 
 11. The basic template for `sqlite3` syntax:
+
 ```Python
 cursor.execute("SQL QUERY/COMMANDS GO HERE")
 ```
@@ -93,18 +113,21 @@ cursor.execute("SQL QUERY/COMMANDS GO HERE")
 14. For example, let's say we wanted to select the unique player ids from the `Player_Birthplaces` table in our database.
 
 15. Remember the original SQL syntax for this query:
+
 ```SQL
+-- select unique values from table field
 SELECT DISTINCT player_ids
 FROM Player_Birthplaces;
 ```
 
 16. The modified syntax for this query in Python using `sqlite3`:
+
 ```Python
 # import sqlite3 module
 import sqlite3
 
 # establish connection to database
-connection = sqlite3.connect("EoCII_Database_Lab.db")
+connection = sqlite3.connect("data.db")
 
 # creates the cursor object
 cursor = connection.cursor()
@@ -126,7 +149,9 @@ print(player_id_results)
 19. Another example using the `WHERE` statement for filtering.
 
 20. The original SQL query:
+
 ```SQL
+-- select all values from table where specific condition is met
 SELECT *
 FROM Player_Birthplaces
 WHERE country='DO';
@@ -135,6 +160,7 @@ WHERE country='DO';
 21. This query returns all columns from the `Player_Birthplaces` table where data in the `country` field is equal to `DO`.
 
 22. The modified syntax for this query in Python using `sqlite3`:
+
 ```Python
 # establish connection to database
 connection = sqlite3.connect("EoCII_Database_Lab.db")
@@ -158,6 +184,7 @@ cursor.close()
 23. Let's say we wanted to just see a query result and not load it to a new varible.
 
 24. A modified version of the previous example:
+
 ```Python
 # import sqlite3 module
 import sqlite3
@@ -188,9 +215,9 @@ cursor.close()
 
 25. In this example, the `for` loop iterates over the rows in the database and uses the `count` variable to track how many rows in the database meet the `WHERE` condition.
 
-<blockquote>Q2: Take at least 3 of the queries you wrote for the Queries and Joins lab and modify them to run within a Python environment. Include code + comments. What changes did you have to make to the query syntax? Any challenges you encountered (and how did you solve them)?</blockquote>
+<blockquote>Q2: Take at least 3 of the queries you wrote for the Queries and Joins lab and modify them to run within a Python environment. Include code + comments. What changes did you have to make to the query syntax? What challenges did you encounter, and how did you solve them?</blockquote>
 
-<blockquote>Q3: How is Python storing the output for the last query from step 24? What could we do with this output?</blockquote>
+<blockquote>Q3: How is Python storing the output for the last query from step 24 (variable, data structure, etc)? What could we do with this output?</blockquote>
 
 ### Additional Considerations
 
@@ -206,16 +233,12 @@ cursor.close()
 
 31. Imagine your company has data stored in a relational database system (Oracle, AWS, Microsft Access, etc.) and there are specific aggregations or calculations that need to be performed on that data regularly (say, for quarterly or annual reports).
 
-32. Provided the underlying data structure remains largely consistent (which in most proprietary database systems it will), you could write a program in Python to automatically generate those aggregations and calculations.
-
-# Practice Problems
-
-33. No practice problems for this lab. Spend this time working on the final project.
+32. Provided the underlying data structure remains largely consistent (this is  true for most proprietary/commercial database systems), you could write a program in Python to automatically generate those aggregations and calculations.
 
 # Lab Notebook Questions
 
 Q1: Describe the basic steps of how to establish a connection with a SQLite database from within Python.
 
-Q2: Take at least 3 of the queries you wrote for the Queries and Joins lab and modify them to run within a Python environment. Include code + comments. What changes did you have to make to the query syntax? Any challenges you encountered (and how did you solve them)?
+Q2: Take at least 3 of the queries you wrote for the Queries and Joins lab and modify them to run within a Python environment. Include code + comments. What changes did you have to make to the query syntax? What challenges did you encounter, and how did you solve them?
 
-Q3: How is Python storing the output for the last query from step 24? What could we do with this output?
+Q3: How is Python storing the output for the last query from step 24 (variable, data structure, etc)? What could we do with this output?
