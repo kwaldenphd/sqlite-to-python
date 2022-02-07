@@ -32,8 +32,8 @@ Peer review and editing was provided by Spring 2021 graduate teaching assistant 
 - [Establishing a Connection](#establishing-a-connection)
 - [Modifying SQL Query Syntax](#modifying-sql-query-syntax)
 - [Creating a Pandas `DataFrame`](#creating-a-pandas-dataframe)
-- [Additional Lab Notebook Questions](#additional-lab-notebook-questions)
 - [Additional Considerations](#additional-considerations)
+- [Additional Lab Notebook Questions](#additional-lab-notebook-questions)
 - [Lab Notebook Questions](#lab-notebook-questions)
 
 [Link to lab procedure as a Jupyter Notebook](https://drive.google.com/file/d/19TiuTHWtsn_0aDpn6g2VKK0IGqQNDj6y/view?usp=sharing)
@@ -280,6 +280,23 @@ df
 df.to_csv("output.csv", index=False)
 ```
 
+
+# Additional Considerations
+
+30. Why would we want to work with a relational database from within Python?
+
+31. The short answer is program performance and memory load.
+
+32. Storing your data in an SQLite database and loading query results into Python requires significantly less memory than storing all the database data in Python.
+
+33. Less stored data = lower memory needs = improved program performance.
+
+34. Interacting with a database from Python can also be a workflow consideration.
+
+35. Imagine your company has data stored in a relational database system (Oracle, AWS, Microsft Access, etc.) and there are specific aggregations or calculations that need to be performed on that data regularly (say, for quarterly or annual reports).
+
+36. Provided the underlying data structure remains largely consistent (this is  true for most proprietary/commercial database systems), you could write a program in Python to automatically generate those aggregations and calculations.
+
 # Additional Lab Notebook Questions
 
 Q3: Take at least 3 of the queries you wrote for the Queries and Joins lab and modify them to run within a Python environment. Include code + comments.
@@ -303,22 +320,6 @@ Q4: For at least one of the Q3 queries, create a Pandas `DataFrame` from the que
     * `pd.to_csv()`
 
 Q5: What changes did you have to make to the query syntax to be able to run SQL queries in Python? What challenges did you encounter in this workflow? How did you solve them?
-
-# Additional Considerations
-
-30. Why would we want to work with a relational database from within Python?
-
-31. The short answer is program performance and memory load.
-
-32. Storing your data in an SQLite database and loading query results into Python requires significantly less memory than storing all the database data in Python.
-
-33. Less stored data = lower memory needs = improved program performance.
-
-34. Interacting with a database from Python can also be a workflow consideration.
-
-35. Imagine your company has data stored in a relational database system (Oracle, AWS, Microsft Access, etc.) and there are specific aggregations or calculations that need to be performed on that data regularly (say, for quarterly or annual reports).
-
-36. Provided the underlying data structure remains largely consistent (this is  true for most proprietary/commercial database systems), you could write a program in Python to automatically generate those aggregations and calculations.
 
 # Lab Notebook Questions
 
