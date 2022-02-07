@@ -28,10 +28,12 @@ Peer review and editing was provided by Spring 2021 graduate teaching assistant 
 
 - [Lab notebook template](#lab-notebook-template)
 - [Data](#data)
-- [From SQLite into Python](#from-sqlite-into-python)
-  * [Establishing a Connection](#establishing-a-connection)
-  * [Modifying SQL Query Syntax](#modifying-sql-query-syntax)
-  * [Additional Considerations](#additional-considerations)
+- [Overview](#overview)
+- [Establishing a Connection](#establishing-a-connection)
+- [Modifying SQL Query Syntax](#modifying-sql-query-syntax)
+- [Creating a Pandas `DataFrame`](#creating-a-pandas-dataframe)
+- [Additional Lab Notebook Questions](#additional-lab-notebook-questions)
+- [Additional Considerations](#additional-considerations)
 - [Lab Notebook Questions](#lab-notebook-questions)
 
 [Link to lab procedure as a Jupyter Notebook](https://drive.google.com/file/d/19TiuTHWtsn_0aDpn6g2VKK0IGqQNDj6y/view?usp=sharing)
@@ -53,7 +55,7 @@ You will need this relational database file for this lab.
 
 If needed, you can download the relational database [from Google Drive](https://drive.google.com/file/d/1uQHOIeMdCZOyXsIdDgfimUE-63I33pIm/view?usp=sharing).
 
-# From SQLite into Python
+# Overview
 
 1. In previous labs, we created a relational database with information about U.S. professional baseball players and teams.
 
@@ -65,7 +67,7 @@ If needed, you can download the relational database [from Google Drive](https://
 
 5. But we also have the option to interact with a SQL-based relational database from within Python, using a couple of key packages.
 
-## Establishing a Connection
+# Establishing a Connection
 
 6. The `sqlite3` module "provides a SQL interface" from within Python ([`sqlite3` documentation](https://docs.python.org/3/library/sqlite3.html)).
 
@@ -96,7 +98,7 @@ cursor.close()
 
 <blockquote>Q1: Describe the basic steps of how to establish a connection with a SQLite database from within Python.</blockquote>
 
-## Modifying SQL Query Syntax
+# Modifying SQL Query Syntax
 
 10. Now we can use our `cursor` object to interact with the database using modified SQL syntax.
 
@@ -117,7 +119,7 @@ cursor.execute("SQL QUERY/COMMANDS GO HERE")
 ```SQL
 -- select unique values from table field
 SELECT DISTINCT player_ids
-FROM Player_Birthplaces;
+FROM player_birthplaces;
 ```
 
 16. The modified syntax for this query in Python using `sqlite3`:
@@ -133,7 +135,7 @@ connection = sqlite3.connect("data.db")
 cursor = connection.cursor()
 
 # creates a new variable player ids 
-player_ids = cursor.execute("SELECT DISTINCT id_person FROM Player_PoB")
+player_ids = cursor.execute("SELECT DISTINCT id_person FROM player_birthplaces")
 
 # get the query return
 player_id_results = cursor.fetchall()
@@ -153,7 +155,7 @@ print(player_id_results)
 ```SQL
 -- select all values from table where specific condition is met
 SELECT *
-FROM Player_Birthplaces
+FROM player_birthplaces
 WHERE country='DO';
 ```
 
@@ -163,13 +165,13 @@ WHERE country='DO';
 
 ```Python
 # establish connection to database
-connection = sqlite3.connect("EoCII_Database_Lab.db")
+connection = sqlite3.connect("data.db")
 
 # creates the cursor object
 cursor = connection.cursor()
 
 # creates a new variable for query results
-do_players = cursor.execute("SELECT * FROM Player_PoB WHERE country='DO'")
+do_players = cursor.execute("SELECT * FROM player_birthplaces WHERE country='DO'")
 
 # get the query return
 player_country_results = cursor.fetchall()
@@ -190,13 +192,13 @@ cursor.close()
 import sqlite3
 
 # establish connection to database
-connection = sqlite3.connect("EoCII_Database_Lab.db")
+connection = sqlite3.connect("data.db")
 
 # creates the cursor object
 cursor = connection.cursor()
 
 # creates a new variable for query results
-cursor.execute("SELECT * FROM Player_PoB WHERE country='DO'")
+cursor.execute("SELECT * FROM player_birthplaces WHERE country='DO'")
 
 # set a row count variable
 count = 0
@@ -215,30 +217,133 @@ cursor.close()
 
 25. In this example, the `for` loop iterates over the rows in the database and uses the `count` variable to track how many rows in the database meet the `WHERE` condition.
 
-<blockquote>Q2: Take at least 3 of the queries you wrote for the Queries and Joins lab and modify them to run within a Python environment. Include code + comments. What changes did you have to make to the query syntax? What challenges did you encounter, and how did you solve them?</blockquote>
+<blockquote>Q2: How is Python storing the output for the last query from step 24 (variable, data structure, etc)? What could we do with this output?</blockquote>
 
-<blockquote>Q3: How is Python storing the output for the last query from step 24 (variable, data structure, etc)? What could we do with this output?</blockquote>
+# Creating a Pandas `DataFrame`
 
-### Additional Considerations
+26. Step 21 in the lab procedure included sample code for a query that returns all columns from the `Player_Birthplaces` table where data in the `country` field is equal to `DO`.
 
-26. Why would we want to work with a relational database from within Python?
+```Python
+# establish connection to database
+connection = sqlite3.connect("data.db")
 
-27. The short answer is program performance and memory load.
+# creates the cursor object
+cursor = connection.cursor()
 
-28. Storing your data in an SQLite database and loading query results into Python requires significantly less memory than storing all the database data in Python.
+# creates a new variable for query results
+do_players = cursor.execute("SELECT * FROM player_birthplaces WHERE country='DO'")
 
-29. Less stored data = lower memory needs = improved program performance.
+# get the query return
+player_country_results = cursor.fetchall()
 
-30. Interacting with a database from Python can also be a workflow consideration.
+# print the new do_players variable
+print(player_country_results)
 
-31. Imagine your company has data stored in a relational database system (Oracle, AWS, Microsft Access, etc.) and there are specific aggregations or calculations that need to be performed on that data regularly (say, for quarterly or annual reports).
+# closes the connection
+cursor.close()
+```
 
-32. Provided the underlying data structure remains largely consistent (this is  true for most proprietary/commercial database systems), you could write a program in Python to automatically generate those aggregations and calculations.
+27.In this example, the query results are being stored to the `player_country_results` variable as a list with sublists or nested lists.
+
+28. We can use `pd.DataFrame` to create a Pandas `DataFrame` from that list with sublists.
+
+```Python
+# import pandas
+import pandas as pd
+
+# establish connection to database
+connection = sqlite3.connect("data.db")
+
+# creates the cursor object
+cursor = connection.cursor()
+
+# creates a new variable for query results
+do_players = cursor.execute("SELECT * FROM player_birthplaces WHERE country='DO'")
+
+# get the query return
+player_country_results = cursor.fetchall()
+
+# closes the connection
+cursor.close()
+
+# create dataframe
+df = pd.DataFrame(player_country_results)
+
+# show df
+df
+```
+
+29. From there, a single line of code will save the `DataFrame` as a `.csv` file.
+
+```Python
+# save to csv
+df.to_csv("output.csv", index=False)
+```
+
+# Additional Lab Notebook Questions
+
+Q3: Take at least 3 of the queries you wrote for the Queries and Joins lab and modify them to run within a Python environment. Include code + comments.
+- For this question, your program needs to:
+  * Establish a connection to the database
+    * `sqlite3.connect()`
+  * Create the cursor object
+    * `connection.cursor()`
+  * Include modified query syntax
+    * `cursor.execute()`
+  * Get query return and store to variable
+    * `cursor.fetchall()`
+  * Close connection
+    * `cursor.close()`
+
+Q4: For at least one of the Q3 queries, create a Pandas `DataFrame` from the query results and write to a `.csv` file. Include code + comments.
+- For this question, your program needs to:
+  * Create the dataframe
+    * `pd.DataFrame()`
+  * Save as CSV 
+    * `pd.to_csv()`
+
+Q5: What changes did you have to make to the query syntax? What challenges did you encounter, and how did you solve them?
+
+# Additional Considerations
+
+30. Why would we want to work with a relational database from within Python?
+
+31. The short answer is program performance and memory load.
+
+32. Storing your data in an SQLite database and loading query results into Python requires significantly less memory than storing all the database data in Python.
+
+33. Less stored data = lower memory needs = improved program performance.
+
+34. Interacting with a database from Python can also be a workflow consideration.
+
+35. Imagine your company has data stored in a relational database system (Oracle, AWS, Microsft Access, etc.) and there are specific aggregations or calculations that need to be performed on that data regularly (say, for quarterly or annual reports).
+
+36. Provided the underlying data structure remains largely consistent (this is  true for most proprietary/commercial database systems), you could write a program in Python to automatically generate those aggregations and calculations.
 
 # Lab Notebook Questions
 
 Q1: Describe the basic steps of how to establish a connection with a SQLite database from within Python.
 
-Q2: Take at least 3 of the queries you wrote for the Queries and Joins lab and modify them to run within a Python environment. Include code + comments. What changes did you have to make to the query syntax? What challenges did you encounter, and how did you solve them?
-
 Q3: How is Python storing the output for the last query from step 24 (variable, data structure, etc)? What could we do with this output?
+
+Q3: Take at least 3 of the queries you wrote for the Queries and Joins lab and modify them to run within a Python environment. Include code + comments.
+- For this question, your program needs to:
+  * Establish a connection to the database
+    * `sqlite3.connect()`
+  * Create the cursor object
+    * `connection.cursor()`
+  * Include modified query syntax
+    * `cursor.execute()`
+  * Get query return and store to variable
+    * `cursor.fetchall()`
+  * Close connection
+    * `cursor.close()`
+
+Q4: For at least one of the Q3 queries, create a Pandas `DataFrame` from the query results and write to a `.csv` file. Include code + comments.
+- For this question, your program needs to:
+  * Create the dataframe
+    * `pd.DataFrame()`
+  * Save as CSV 
+    * `pd.to_csv()`
+
+Q5: What changes did you have to make to the query syntax? What challenges did you encounter, and how did you solve them?
