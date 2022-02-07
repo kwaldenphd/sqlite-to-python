@@ -302,7 +302,7 @@ Q4: For at least one of the Q3 queries, create a Pandas `DataFrame` from the que
   * Save as CSV 
     * `pd.to_csv()`
 
-Q5: What changes did you have to make to the query syntax? What challenges did you encounter, and how did you solve them?
+Q5: What changes did you have to make to the query syntax to be able to run SQL queries in Python? What challenges did you encounter in this workflow? How did you solve them?
 
 # Additional Considerations
 
@@ -346,4 +346,4 @@ Q4: For at least one of the Q3 queries, create a Pandas `DataFrame` from the que
   * Save as CSV 
     * `pd.to_csv()`
 
-Q5: What changes did you have to make to the query syntax? What challenges did you encounter, and how did you solve them?
+Q5: What changes did you have to make to the query syntax to be able to run SQL queries in Python? What challenges did you encounter in this workflow? How did you solve them?
