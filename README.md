@@ -108,7 +108,16 @@ cursor.close()
 cursor.execute("SQL QUERY/COMMANDS GO HERE")
 ```
 
+ALTERNATE WORKFLOW:
+
+```Python
+sql_command = """SQL QUERY/COMMANDS GO HERE;"""
+
+cursor.execute(sql_command)
+```
+
 12. `cursor.execute()` followed by the SQL command (in quotation marks) lets us use SQL statements on our database from within Python.
+  * Alternatively, saving the SQL query as a string (with three double quotation marks and a semi colon) and running `cursor.execute()` on the string variable.
 
 13. Check out the [`sqlite3` documentation](https://docs.python.org/3/library/sqlite3.html) to learn more about the module's functionality and syntax.
 
@@ -142,8 +151,38 @@ player_id_results = cursor.fetchall()
 
 # print the list of unique player ids now contained in the player_id_results variable
 print(player_id_results)
+
+# closes the connection
+cursor.close()
 ```
 
+ALTERNATE WORKFLOW:
+
+```Python
+# import sqlite3 module
+import sqlite3
+
+# establish connection to database
+connection = sqlite3.connect("data.db")
+
+# creates the cursor object
+cursor = connection.cursor()
+
+# save query as string
+sql_command = """SELECT id_person FROM player_birthplaces;"""
+
+# creates a new variable player ids 
+player_ids = cursor.execute(sql_command)
+
+# get the query return
+player_id_results = cursor.fetchall()
+
+# print the list of unique player ids now contained in the player_id_results variable
+print(player_id_results)
+
+# closes the connection
+cursor.close()
+```
 17. The `cursor.execute()` function runs the `SELECT DISTINCT` statement.
 
 18. The new `player_ids` variable contains the `player_id` column from the `Player_Birthplaces` table as a list in Python.
@@ -177,6 +216,34 @@ do_players = cursor.execute("SELECT * FROM player_birthplaces WHERE country='DO'
 player_country_results = cursor.fetchall()
 
 # print the new do_players variable
+print(player_country_results)
+
+# closes the connection
+cursor.close()
+```
+
+ALTERNATE WORKFLOW:
+
+```Python
+# import sqlite3 module
+import sqlite3
+
+# establish connection to database
+connection = sqlite3.connect("data.db")
+
+# creates the cursor object
+cursor = connection.cursor()
+
+# save query as string
+sql_command = """SELECT * FROM player_birthplaces WHERE country='DO';"""
+
+# creates a new variable player ids 
+do_players = cursor.execute(sql_command)
+
+# get the query return
+player_country_results = cursor.fetchall()
+
+# print the list of unique player ids now contained in the player_id_results variable
 print(player_country_results)
 
 # closes the connection
@@ -273,6 +340,38 @@ df = pd.DataFrame(player_country_results)
 df
 ```
 
+
+ALTERNATE WORKFLOW:
+
+```Python
+# import sqlite3 module
+import sqlite3
+
+# establish connection to database
+connection = sqlite3.connect("data.db")
+
+# creates the cursor object
+cursor = connection.cursor()
+
+# save query as string
+sql_command = """SELECT * FROM player_birthplaces WHERE country='DO';"""
+
+# creates a new variable player ids 
+do_players = cursor.execute(sql_command)
+
+# get the query return
+player_country_results = cursor.fetchall()
+
+# closes the connection
+cursor.close()
+
+# create dataframe
+df = pd.DataFrame(player_country_results)
+
+# show df
+df
+```
+
 29. From there, a single line of code will save the `DataFrame` as a `.csv` file.
 
 ```Python
@@ -280,22 +379,37 @@ df
 df.to_csv("output.csv", index=False)
 ```
 
+30. Modified syntax that takes the column names from SQL and maps those onto your `DataFrame`.
+
+```Python
+# runs query
+results = cursor.execute(sql_command)
+
+# store column names as list
+cols = [column[0] for column in results.description]
+
+# create dataframe with query results and column names
+df = pd.DataFrame.from_records(data= results.fetchall(), columns=cols)
+
+# close connection
+cursor.close()
+```
 
 # Additional Considerations
 
-30. Why would we want to work with a relational database from within Python?
+31. Why would we want to work with a relational database from within Python?
 
-31. The short answer is program performance and memory load.
+32. The short answer is program performance and memory load.
 
-32. Storing your data in an SQLite database and loading query results into Python requires significantly less memory than storing all the database data in Python.
+33. Storing your data in an SQLite database and loading query results into Python requires significantly less memory than storing all the database data in Python.
 
-33. Less stored data = lower memory needs = improved program performance.
+34. Less stored data = lower memory needs = improved program performance.
 
-34. Interacting with a database from Python can also be a workflow consideration.
+35. Interacting with a database from Python can also be a workflow consideration.
 
-35. Imagine your company has data stored in a relational database system (Oracle, AWS, Microsft Access, etc.) and there are specific aggregations or calculations that need to be performed on that data regularly (say, for quarterly or annual reports).
+36. Imagine your company has data stored in a relational database system (Oracle, AWS, Microsft Access, etc.) and there are specific aggregations or calculations that need to be performed on that data regularly (say, for quarterly or annual reports).
 
-36. Provided the underlying data structure remains largely consistent (this is  true for most proprietary/commercial database systems), you could write a program in Python to automatically generate those aggregations and calculations.
+37. Provided the underlying data structure remains largely consistent (this is  true for most proprietary/commercial database systems), you could write a program in Python to automatically generate those aggregations and calculations.
 
 # Additional Lab Notebook Questions
 
