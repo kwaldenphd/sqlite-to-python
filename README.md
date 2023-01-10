@@ -1,7 +1,6 @@
 # From SQLite into Python
 
-<a href="http://creativecommons.org/licenses/by-nc/4.0/" rel="license"><img style="border-width: 0;" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" alt="Creative Commons License" /></a>
-This tutorial is licensed under a <a href="http://creativecommons.org/licenses/by-nc/4.0/" rel="license">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
+<a href="http://creativecommons.org/licenses/by-nc/4.0/" rel="license"><img style="border-width: 0;" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" alt="Creative Commons License" /></a>This tutorial was written by Katherine Walden and is licensed under a <a href="http://creativecommons.org/licenses/by-nc/4.0/" rel="license">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
 
 ## Lab Goals
 
@@ -12,6 +11,13 @@ By the end of this lab, students will be able to:
 - Connecting to a SQLite database from Python
 - Modify SQL queries for the Python programming environment
 - Understand the basics of data loading, storage, memory, and program performance
+
+<table>
+ <tr><td>
+<img src="https://elearn.southampton.ac.uk/wp-content/blogs.dir/sites/64/2021/04/PanPan.png" alt="Panopto logo" width="50"/></td>
+<td><a href="https://notredame.hosted.panopto.com/Panopto/Pages/Viewer.aspx?pid=a9cdb4d3-f14d-4923-9359-ae350111e68e">Lecture/live coding playlist</a></td>
+  </tr>
+  </table>
 
 ## Acknowledgements
 
@@ -26,6 +32,7 @@ Peer review and editing was provided by Spring 2021 graduate teaching assistant 
 
 # Table of Contents
 
+- [Lecture & Live Coding](#lecture--live-coding)
 - [Lab notebook template](#lab-notebook-template)
 - [Data](#data)
 - [Overview](#overview)
@@ -37,6 +44,23 @@ Peer review and editing was provided by Spring 2021 graduate teaching assistant 
 - [Lab Notebook Questions](#lab-notebook-questions)
 
 [Link to lab procedure as a Jupyter Notebook](https://drive.google.com/file/d/19TiuTHWtsn_0aDpn6g2VKK0IGqQNDj6y/view?usp=sharing)
+
+# Lecture & Live Coding
+
+Throughout this lab, you will see a Panopto icon at the start of select sections.
+
+This icon indicates there is lecture/live coding asynchronous content that accompanies this section of the lab. 
+
+You can click the link in the figure caption to access these materials (ND users only).
+
+Example:
+
+<table>
+ <tr><td>
+<img src="https://elearn.southampton.ac.uk/wp-content/blogs.dir/sites/64/2021/04/PanPan.png" alt="Panopto logo" width="50"/></td>
+<td><a href="https://notredame.hosted.panopto.com/Panopto/Pages/Viewer.aspx?pid=a9cdb4d3-f14d-4923-9359-ae350111e68e">Lecture/live coding playlist</a></td>
+  </tr>
+  </table>
 
 # Lab Notebook Template
 
@@ -57,30 +81,38 @@ If needed, you can download the relational database [from Google Drive](https://
 
 # Overview
 
-1. In previous labs, we created a relational database with information about U.S. professional baseball players and teams.
+<table>
+ <tr><td>
+<img src="https://elearn.southampton.ac.uk/wp-content/blogs.dir/sites/64/2021/04/PanPan.png" alt="Panopto logo" width="50"/></td>
+<td><a href="https://notredame.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=11b2b9a8-5a01-42f7-86b8-ae3500fcb717">Overview</a></td>
+  </tr>
+  </table>
 
-2. We also explored how SQL syntax can let us interact with a relational database.
+In previous labs, we created a relational database with information about U.S. professional baseball players and teams. We also explored how SQL syntax can let us interact with a relational database.
 
-3. But imagine we want to work with a relational database from within Python.
+But imagine we want to work with a relational database from within Python.
 
-4. We could work in SQL using a combination of queries and joins to create a new table with specific fields we want to work with, then export that table as a `.csv` file and load it into Python.
-
-5. But we also have the option to interact with a SQL-based relational database from within Python, using a couple of key packages.
+We could work in SQL using a combination of queries and joins to create a new table with specific fields we want to work with, then export that table as a `.csv` file and load it into Python. But we also have the option to interact with a SQL-based relational database from within Python, using a couple of key packages.
 
 # Establishing a Connection
 
-6. The `sqlite3` module "provides a SQL interface" from within Python ([`sqlite3` documentation](https://docs.python.org/3/library/sqlite3.html)).
+<table>
+ <tr><td>
+<img src="https://elearn.southampton.ac.uk/wp-content/blogs.dir/sites/64/2021/04/PanPan.png" alt="Panopto logo" width="50"/></td>
+<td><a href="https://notredame.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=45557e7d-ae1c-487e-9474-ae3500fd9ee0">Establishing a Connection</a></td>
+  </tr>
+  </table>
 
-7. `sqlite3` lets us establish a connection with a SQL database from within Python and then we can interact with the database using modified SQL commands.
+The `sqlite3` module "provides a SQL interface" from within Python ([`sqlite3` documentation](https://docs.python.org/3/library/sqlite3.html)), letting us establish a connection with a SQL database from within Python and then we can interact with the database using modified SQL commands.
 
-8. The basic steps for `sqlite3`:
+The basic steps for `sqlite3`:
 - Install and import `sqlite3` module
 - Establish a `connection` with the database
 - Create a `cursor` object 
 - Use the `execute()` method in combination with the `cursor` object to execute SQL queries
 - Close the connection using `close()` when done working with the database
 
-9. To express this programmatically in Python:
+To express this programmatically in Python:
 
 ```Python
 # import sqlite3 module
@@ -100,9 +132,14 @@ cursor.close()
 
 # Modifying SQL Query Syntax
 
-10. Now we can use our `cursor` object to interact with the database using modified SQL syntax.
+<table>
+ <tr><td>
+<img src="https://elearn.southampton.ac.uk/wp-content/blogs.dir/sites/64/2021/04/PanPan.png" alt="Panopto logo" width="50"/></td>
+<td><a href="https://notredame.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=f66a46f8-d475-4d44-b8b0-ae35010d1dca">Modifying SQL Query Syntax</a></td>
+  </tr>
+  </table>
 
-11. The basic template for `sqlite3` syntax:
+Now we can use our `cursor` object to interact with the database using modified SQL syntax. The basic template for `sqlite3` syntax:
 
 ```Python
 cursor.execute("SQL QUERY/COMMANDS GO HERE")
@@ -116,14 +153,12 @@ sql_command = """SQL QUERY/COMMANDS GO HERE;"""
 cursor.execute(sql_command)
 ```
 
-12. `cursor.execute()` followed by the SQL command (in quotation marks) lets us use SQL statements on our database from within Python.
+`cursor.execute()` followed by the SQL command (in quotation marks) lets us use SQL statements on our database from within Python.
   * Alternatively, saving the SQL query as a string (with three double quotation marks and a semi colon) and running `cursor.execute()` on the string variable.
 
-13. Check out the [`sqlite3` documentation](https://docs.python.org/3/library/sqlite3.html) to learn more about the module's functionality and syntax.
+<blockquote>Check out the <a href = "https://docs.python.org/3/library/sqlite3.html"><code>sqlite3</code> documentation</a> to learn more about the module's functionality and syntax.</blockquote>
 
-14. For example, let's say we wanted to select the unique player ids from the `Player_Birthplaces` table in our database.
-
-15. Remember the original SQL syntax for this query:
+For example, let's say we wanted to select the unique player ids from the `Player_Birthplaces` table in our database. Remember the original SQL syntax for this query:
 
 ```SQL
 -- select unique values from table field
@@ -131,7 +166,7 @@ SELECT DISTINCT player_ids
 FROM player_birthplaces;
 ```
 
-16. The modified syntax for this query in Python using `sqlite3`:
+The modified syntax for this query in Python using `sqlite3`:
 
 ```Python
 # import sqlite3 module
@@ -183,13 +218,10 @@ print(player_id_results)
 # closes the connection
 cursor.close()
 ```
-17. The `cursor.execute()` function runs the `SELECT DISTINCT` statement.
 
-18. The new `player_ids` variable contains the `player_id` column from the `Player_Birthplaces` table as a list in Python.
+The `cursor.execute()` function runs the `SELECT DISTINCT` statement. The new `player_ids` variable contains the `player_id` column from the `Player_Birthplaces` table as a list in Python.
 
-19. Another example using the `WHERE` statement for filtering.
-
-20. The original SQL query:
+Another example using the `WHERE` statement for filtering. The original SQL query:
 
 ```SQL
 -- select all values from table where specific condition is met
@@ -198,9 +230,7 @@ FROM player_birthplaces
 WHERE country='DO';
 ```
 
-21. This query returns all columns from the `Player_Birthplaces` table where data in the `country` field is equal to `DO`.
-
-22. The modified syntax for this query in Python using `sqlite3`:
+This query returns all columns from the `Player_Birthplaces` table where data in the `country` field is equal to `DO`. The modified syntax for this query in Python using `sqlite3`:
 
 ```Python
 # establish connection to database
@@ -250,9 +280,7 @@ print(player_country_results)
 cursor.close()
 ```
 
-23. Let's say we wanted to just see a query result and not load it to a new varible.
-
-24. A modified version of the previous example:
+Let's say we wanted to just see a query result and not load it to a new variable. A modified version of the previous example:
 
 ```Python
 # import sqlite3 module
@@ -282,13 +310,20 @@ print(count, 'rows')
 cursor.close()
 ```
 
-25. In this example, the `for` loop iterates over the rows in the database and uses the `count` variable to track how many rows in the database meet the `WHERE` condition.
+In this example, the `for` loop iterates over the rows in the database and uses the `count` variable to track how many rows in the database meet the `WHERE` condition.
 
 <blockquote>Q2: How is Python storing the output for the last query from step 24 (variable, data structure, etc)? What could we do with this output?</blockquote>
 
 # Creating a Pandas `DataFrame`
 
-26. Step 21 in the lab procedure included sample code for a query that returns all columns from the `Player_Birthplaces` table where data in the `country` field is equal to `DO`.
+<table>
+ <tr><td>
+<img src="https://elearn.southampton.ac.uk/wp-content/blogs.dir/sites/64/2021/04/PanPan.png" alt="Panopto logo" width="50"/></td>
+<td><a href="https://notredame.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=bc5f5fcb-fb11-4473-9d54-ae35010efe74">Creating a Pandas DataFrame</a></td>
+  </tr>
+  </table>
+
+The previous section of the lab included sample code for a query that returns all columns from the `Player_Birthplaces` table where data in the `country` field is equal to `DO`.
 
 ```Python
 # establish connection to database
@@ -310,9 +345,7 @@ print(player_country_results)
 cursor.close()
 ```
 
-27.In this example, the query results are being stored to the `player_country_results` variable as a list with sublists or nested lists.
-
-28. We can use `pd.DataFrame` to create a Pandas `DataFrame` from that list with sublists.
+In this example, the query results are being stored to the `player_country_results` variable as a list with sublists or nested lists. We can use `pd.DataFrame` to create a Pandas `DataFrame` from that list with sublists.
 
 ```Python
 # import pandas
@@ -372,14 +405,14 @@ df = pd.DataFrame(player_country_results)
 df
 ```
 
-29. From there, a single line of code will save the `DataFrame` as a `.csv` file.
+From there, a single line of code will save the `DataFrame` as a `.csv` file.
 
 ```Python
 # save to csv
 df.to_csv("output.csv", index=False)
 ```
 
-30. Modified syntax that takes the column names from SQL and maps those onto your `DataFrame`.
+Modified syntax that takes the column names from SQL and maps those onto your `DataFrame`.
 
 ```Python
 # runs query
@@ -397,21 +430,25 @@ cursor.close()
 
 # Additional Considerations
 
-31. Why would we want to work with a relational database from within Python?
+<table>
+ <tr><td>
+<img src="https://elearn.southampton.ac.uk/wp-content/blogs.dir/sites/64/2021/04/PanPan.png" alt="Panopto logo" width="50"/></td>
+<td><a href="https://notredame.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=2364e173-0e6b-4f82-91e1-ae350110bf80">Additional Considerations</a></td>
+  </tr>
+  </table>
 
-32. The short answer is program performance and memory load.
+Why would we want to work with a relational database from within Python? The short answer is program performance and memory load. Storing your data in an SQLite database and loading query results into Python requires significantly less memory than storing all the database data in Python. Less stored data = lower memory needs = improved program performance.
 
-33. Storing your data in an SQLite database and loading query results into Python requires significantly less memory than storing all the database data in Python.
-
-34. Less stored data = lower memory needs = improved program performance.
-
-35. Interacting with a database from Python can also be a workflow consideration.
-
-36. Imagine your company has data stored in a relational database system (Oracle, AWS, Microsft Access, etc.) and there are specific aggregations or calculations that need to be performed on that data regularly (say, for quarterly or annual reports).
-
-37. Provided the underlying data structure remains largely consistent (this is  true for most proprietary/commercial database systems), you could write a program in Python to automatically generate those aggregations and calculations.
+Interacting with a database from Python can also be a workflow consideration. Imagine your company has data stored in a relational database system (Oracle, AWS, Microsft Access, etc.) and there are specific aggregations or calculations that need to be performed on that data regularly (say, for quarterly or annual reports). Provided the underlying data structure remains largely consistent (this is  true for most proprietary/commercial database systems), you could write a program in Python to automatically generate those aggregations and calculations.
 
 # Additional Lab Notebook Questions
+
+<table>
+ <tr><td>
+<img src="https://elearn.southampton.ac.uk/wp-content/blogs.dir/sites/64/2021/04/PanPan.png" alt="Panopto logo" width="50"/></td>
+<td><a href="https://notredame.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=2364e173-0e6b-4f82-91e1-ae350110bf80">Additional Lab Notebook Questions</a></td>
+  </tr>
+  </table>
 
 Q3: Take at least 3 of the queries you wrote for the Queries and Joins lab and modify them to run within a Python environment. Include code + comments.
 - For this question, your program needs to:
@@ -436,6 +473,8 @@ Q4: For at least one of the Q3 queries, create a Pandas `DataFrame` from the que
 Q5: What changes did you have to make to the query syntax to be able to run SQL queries in Python? What challenges did you encounter in this workflow? How did you solve them?
 
 # Lab Notebook Questions
+
+[Link to lab notebook template (Jupyter Notebook)](https://colab.research.google.com/drive/1LFkXDBg0IUQ-Rpa_-ZVvAx1agKZ-2Hft?usp=sharing)
 
 Q1: Describe the basic steps of how to establish a connection with a SQLite database from within Python.
 
